@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simpler — Timeboxing for ADHD minds</title>
+<meta name="description" content="Simpler builds a timebox-based scheduling app designed for people with ADHD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --text: #1d1d1f;
+    --muted: #5f6368;
+    --accent: #3b6ef5;
+    --accent-soft: #e7eeff;
+    --card: #ffffff;
+    --line: #e6e3dc;
+    --b1: #ffd6a5; --b2: #caffbf; --b3: #a0c4ff; --b4: #ffc6ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141416; --text: #f2f2f4; --muted: #a1a1aa;
+      --accent: #7c9cff; --accent-soft: #1f2640; --card: #1c1c20; --line: #2c2c33;
+      --b1: #8a5a22; --b2: #3d7a35; --b3: #2f5597; --b4: #7a3b7a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 22px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; text-decoration: none; color: var(--text); }
+  .logo span { color: var(--accent); }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 0.95rem; }
+  nav a:hover { color: var(--text); }
+
+  .hero { padding: 64px 0 72px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .eyebrow { display: inline-block; background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: 0.85rem; padding: 4px 12px; border-radius: 999px; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; letter-spacing: -0.03em; margin: 18px 0; font-weight: 800; }
+  .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 28px; max-width: 34ch; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 12px 22px; border-radius: 10px; font-weight: 600; }
+  .btn:hover { filter: brightness(1.08); }
+
+  .day { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+  .day-title { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; font-weight: 500; }
+  .slot { display: flex; gap: 12px; align-items: stretch; margin-bottom: 8px; }
+  .slot time { width: 48px; font-size: 0.8rem; color: var(--muted); padding-top: 10px; }
+  .box { flex: 1; border-radius: 10px; padding: 10px 12px; font-size: 0.92rem; font-weight: 500; color: #1d1d1f; }
+  @media (prefers-color-scheme: dark) { .box { color: #f2f2f4; } }
+  .b1 { background: var(--b1); } .b2 { background: var(--b2); min-height: 64px; } .b3 { background: var(--b3); } .b4 { background: var(--b4); }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.9rem; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .sub { color: var(--muted); max-width: 60ch; margin: 0 0 36px; font-size: 1.05rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .card h3 { margin: 0 0 8px; font-size: 1.1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+  .icon { font-size: 1.5rem; margin-bottom: 10px; }
+
+  .product { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .product ul { padding-left: 1.1rem; margin: 0; }
+  .product li { margin-bottom: 10px; }
+
+  .contact { text-align: center; }
+  .contact .sub { margin-left: auto; margin-right: auto; }
+  .mail { font-size: 1.25rem; font-weight: 700; color: var(--accent); text-decoration: none; word-break: break-all; }
+  footer { padding: 28px 0 40px; color: var(--muted); font-size: 0.88rem; text-align: center; border-top: 1px solid var(--line); }
+
+  @media (max-width: 760px) {
+    nav { display: none; }
+    .hero, .product { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 36px 0 48px; }
+    .grid { grid-template-columns: 1fr; }
+    section { padding: 48px 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Simpler<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#product">Product</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Timeboxing, made for ADHD</span>
+      <h1>Plan your day in boxes, not endless lists.</h1>
+      <p class="lead">Simpler builds a timebox-based scheduling app designed for people with ADHD.</p>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+    <div class="day" aria-hidden="true">
+      <div class="day-title">Today</div>
+      <div class="slot"><time>9:00</time><div class="box b1">Reply to emails</div></div>
+      <div class="slot"><time>9:30</time><div class="box b2">Deep work: one task only</div></div>
+      <div class="slot"><time>10:30</time><div class="box b3">Break &amp; move</div></div>
+      <div class="slot"><time>11:00</time><div class="box b4">Errands</div></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2>What we do</h2>
+    <p class="sub">We develop a scheduling application built around timeboxing: giving each task its own fixed block of time. Instead of a long to-do list that keeps growing, your day becomes a short series of clear, manageable blocks.</p>
+    <div class="grid">
+      <div class="card"><div class="icon">⏱️</div><h3>Time you can see</h3><p>Every task gets a visible block on your day, so it's easier to know what to do now and what comes next.</p></div>
+      <div class="card"><div class="icon">🎯</div><h3>One thing at a time</h3><p>Small, defined blocks help you start, stay with the task, and stop when the time is up.</p></div>
+      <div class="card"><div class="icon">🌱</div><h3>Built for ADHD</h3><p>We design with the needs of people with ADHD in mind, keeping planning simple and low-pressure.</p></div>
+    </div>
+  </section>
+
+  <section id="product">
+    <div class="product">
+      <div>
+        <h2>Our product</h2>
+        <p class="sub" style="margin-bottom:0">A timebox-based scheduling app for people with ADHD, turning plans into time blocks you can actually follow.</p>
+      </div>
+      <div class="card">
+        <ul>
+          <li><strong>Timebox your tasks</strong> — place each task into its own block of time.</li>
+          <li><strong>See your whole day</strong> — a simple timeline instead of an overwhelming list.</li>
+          <li><strong>Keep it simple</strong> — fewer decisions, less friction, more done.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p class="sub">Questions, partnerships, or feedback? We'd love to hear from you.</p>
+    <a class="mail" href="mailto:admin@simpler-app.com">admin@simpler-app.com</a>
+  </section>
+</main>
+
+<footer>© 2026 Simpler. All rights reserved.</footer>
+</body>
+</html>
